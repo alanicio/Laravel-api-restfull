@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+</head>
+<body>
+	<form id="form">
+		<label>NOMBRE</label>
+		<input type="text" name="nombre" id="nombre">
+		<br>
+		<label>Edad</label>
+		<input type="number" name="edad" id="edad">
+		<input type="submit">
+	</form>
+	<script type="text/javascript">
+		$('#form').submit(function(){
+			var formData = JSON.stringify($("#form").serializeArray());
+			var nombre=$('#nombre').val();
+			var edad=$('#edad').val();
+			alert(formData.name);
+			$.ajax({
+				type:"POST",
+				url:"http://127.0.0.1:8000/persona",
+				data: {nombre:nombre,edad:edad},
+				dataType:"JSON",
+				success: function(){
+					alert('llegue al success');
+				},
+			});
+			return false;
+		});
+	</script>
+</body>
+</html>
